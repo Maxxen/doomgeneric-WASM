@@ -74,6 +74,8 @@
 
 #include "d_main.h"
 
+#include <emscripten.h>
+#include <emscripten/html5.h>
 //
 // D-DoomLoop()
 // Not a globally visible function,
@@ -428,12 +430,11 @@ void D_DoomLoop (void)
     I_SetGrabMouseCallback(D_GrabMouseCallback);
     I_InitGraphics();
     I_EnableLoadingDisk();
-
+	
     V_RestoreBuffer();
     R_ExecuteSetViewSize();
 
     D_StartGameLoop();
-
     if (testcontrols)
     {
         wipegamestate = gamestate;
@@ -1774,8 +1775,8 @@ void D_DoomMain (void)
 
     DEH_printf("HU_Init: Setting up heads up display.\n");
     HU_Init ();
-
     DEH_printf("ST_Init: Init status bar.\n");
+
     ST_Init ();
 
     // If Doom II without a MAP01 lump, this is a store demo.
@@ -1812,14 +1813,16 @@ void D_DoomMain (void)
     {
 		singledemo = true;              // quit after one demo
 		G_DeferedPlayDemo (demolumpname);
-		D_DoomLoop ();  // never returns
+		emscripten_request_animation_frame_loop(D_DoomLoop, 0);
+			//D_DoomLoop ();  // never returns
     }
 
     p = M_CheckParmWithArgs("-timedemo", 1);
     if (p)
     {
 		G_TimeDemo (demolumpname);
-		D_DoomLoop ();  // never returns
+		emscripten_request_animation_frame_loop(D_DoomLoop, 0);
+//		D_DoomLoop ();  // never returns
     }
 
     if (startloadgame >= 0)

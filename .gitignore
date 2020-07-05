@@ -1,0 +1,4 @@
+*.wad
+*.WAD
+build/
+doomgeneric/build

@@ -132,6 +132,9 @@ void I_StartFrame (void);
 
 void I_StartTic (void);
 
+// DOOM-WASM, declare this in header to avoid implicit declaration
+void I_EndRead (void);
+
 // Enable the loading disk image displayed when reading from disk.
 
 void I_EnableLoadingDisk(void);

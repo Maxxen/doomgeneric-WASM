@@ -216,13 +216,12 @@ void I_InitGraphics (void)
             fb_scaling = s_Fb.yres / SCREENHEIGHT;
         printf("I_InitGraphics: Auto-scaling factor: %d\n", fb_scaling);
     }
-
-
     /* Allocate screen to draw to */
+
+
 	I_VideoBuffer = (byte*)Z_Malloc (SCREENWIDTH * SCREENHEIGHT, PU_STATIC, NULL);  // For DOOM to draw on
 
 	screenvisible = true;
-
     extern int I_InitInput(void);
     I_InitInput();
 }

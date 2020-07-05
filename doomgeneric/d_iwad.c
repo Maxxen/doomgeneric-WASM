@@ -365,7 +365,7 @@ static void CheckDOSDefaults(void)
 {
     // These are the default install directories used by the deice
     // installer program:
-
+	AddIWADDir("\\doom1")
     AddIWADDir("\\doom2");              // Doom II
     AddIWADDir("\\plutonia");           // Final Doom
     AddIWADDir("\\tnt");
